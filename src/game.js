@@ -3,41 +3,40 @@ var con = can.getContext("2d");
 
 can.width = can.height * (can.clientWidth / can.clientHeight);
 
-var arr = [];
-var a = 0;
-var v = 0;
+var ar = [];
+var an = 0;
+var vl = 0;
 
 for (var i = 0; i < 50; i++) {
-  a = Math.random() * 2 * Math.PI;
-  v = Math.random() * 3 - 1;
-  v = v * 0.1;
-  arr.push({
-    x: Math.random() * can.width,
-    y: Math.random() * can.height,
-    dx: v * Math.cos(a),
-    dy: v * Math.sin(a),
-    v: v,
-    a: a,
-    c: "#" + Math.floor(Math.random() * 16777215).toString(16)
+  an = Math.random() * 2 * Math.PI;
+  vl = Math.random() * 3 - 1;
+  vl = vl * 0.1;
+  ar.push({
+    x_: Math.random() * can.width,
+    y_: Math.random() * can.height,
+    dx: vl * Math.cos(an),
+    dy: vl * Math.sin(an),
+    vl: vl,
+    an: an,
+    cl: "#" + Math.floor(Math.random() * 16777215).toString(16)
   });
 }
 
 function draw() {
   con.clearRect(0, 0, can.width, can.height);
 
-  // drawing a circle
-  for (var i = 0; i < arr.length; i++) {
-    arr[i].a = arr[i].a + (Math.random() - 0.5) * 0.1 * Math.PI;
-    //arr[i].v = arr[i].v * (1 + Math.random() - 0.5) * 0.1;
-    arr[i].dx = arr[i].v * Math.cos(arr[i].a);
-    arr[i].dy = arr[i].v * Math.sin(arr[i].a);
+  for (var i = 0; i < ar.length; i++) {
+    ar[i].an = ar[i].an + (Math.random() - 0.5) * 0.1 * Math.PI;
+    //ar[i].vl = ar[i].vl * (1 + Math.random() - 0.5) * 0.1;
+    ar[i].dx = ar[i].vl * Math.cos(ar[i].an);
+    ar[i].dy = ar[i].vl * Math.sin(ar[i].an);
 
-    arr[i].x = (arr[i].x + arr[i].dx) % can.width;
-    arr[i].y = (arr[i].y + arr[i].dy) % can.height;
+    ar[i].x_ = (ar[i].x_ + ar[i].dx) % can.width;
+    ar[i].y_ = (ar[i].y_ + ar[i].dy) % can.height;
 
     con.beginPath();
-    con.arc(arr[i].x, arr[i].y, 1, 0, 2 * Math.PI);
-    con.fillStyle = arr[i].c;
+    con.arc(ar[i].x_, ar[i].y_, 1, 0, 2 * Math.PI);
+    con.fillStyle = ar[i].cl;
     con.fill();
   }
   requestAnimationFrame(draw);
