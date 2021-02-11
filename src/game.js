@@ -34,6 +34,15 @@ function draw() {
     ar[i].x_ = (ar[i].x_ + ar[i].dx) % can.width;
     ar[i].y_ = (ar[i].y_ + ar[i].dy) % can.height;
 
+    //calcola la forza di tutti su ciascuno
+    //for(var i=0;i<ar.length;i++)
+    //  for(var j=0,var ar[i].fx=0;j<ar.length;j++)
+    //    if(i!=j) {
+    //      ar[i].fx =+ Math.cos(ang(i,j)) *  k / dst(i,j);
+    //      ar[i].fy =+ Math.sin(ang(i,j)) *  k / dst(i,j);k / dist(i,j);
+    //    }
+
+
     con.beginPath();
     con.arc(ar[i].x_, ar[i].y_, 1, 0, 2 * Math.PI);
     con.fillStyle = ar[i].cl;
