@@ -9,13 +9,10 @@ var vm = 0;
 
 for (var i = 0; i < 50; i++) {
   va = Math.random() * 2 * Math.PI;
-  vm = Math.random() * 3 - 1;
-  vm = vm * 0.1;
+  vm = Math.random() * 0.1;
   ar.push({
     x_: Math.random() * can.width,
     y_: Math.random() * can.height,
-    dx: vm * Math.cos(va),
-    dy: vm * Math.sin(va),
     vm: vm,
     va: va,
     cl: "#" + Math.floor(Math.random() * 16777215).toString(16)
@@ -28,16 +25,35 @@ function draw() {
   for (var i = 0; i < ar.length; i++) {
     ar[i].va = ar[i].va + (Math.random() - 0.5) * 0.1 * Math.PI;
     //ar[i].vm = ar[i].vm * (1 + Math.random() - 0.5) * 0.1;
-    ar[i].dx = ar[i].vm * Math.cos(ar[i].va);
-    ar[i].dy = ar[i].vm * Math.sin(ar[i].va);
+    //ar[i].dx = ar[i].vm * Math.cos(ar[i].va);
+    //ar[i].dy = ar[i].vm * Math.sin(ar[i].va);
 
-    ar[i].x_ = (ar[i].x_ + ar[i].dx) % can.width;
-    ar[i].y_ = (ar[i].y_ + ar[i].dy) % can.height;
+    ar[i].x_ = (ar[i].x_ + ar[i].vm * Math.cos(ar[i].va)) % can.width;
+    ar[i].y_ = (ar[i].y_ + ar[i].vm * Math.sin(ar[i].va)) % can.height;
 
     //calcola la forza di tutti su ciascuno
-    //for(var i = 0, var fx = 0, var fy = 0; i < ar.length; i++){
-    //  for(var j = 0; j < ar.length; j++)
-    //    if(i != j) {
+    //for(var i = 0; i < ar.length; i++)
+    //  for(var j = 0; j < i)
+    //    if(i != j)
+    //      fm=k*d(i,j)
+    //      ar[i].ax=+fm*cos(fa)
+    //      ar[i].ay=+fm*sin(fa)
+    //      ar[j].ax=-fm*cos(fa)
+    //      ar[j].ay=-fm*sin(fa)
+    //
+    //      //ff=k*m1*m2/dd
+    //      //aa=ff/mm
+    //      //dv=aa*dt
+    //      //dx=(1/2)*dv*dt+vv*dt=(1/2)*aa*dt^2+vv*dt
+    //
+    //      ar[i].vx=+ar[i].ax*cos(fa)
+    //      ar[i].vy=+ar[i].ay*sin(fa)
+    //      ar[j].vx=-ar[j].ax*cos(fa)
+    //      ar[j].vy=-ar[j].ay*sin(fa)
+
+
+
+
     //      fx =+ Math.cos(ang(i, j)) *  k / dst(i, j);
     //      fy =+ Math.sin(ang(i, j)) *  k / dst(i, j);
     //    }
