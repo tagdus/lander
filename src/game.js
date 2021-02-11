@@ -4,17 +4,14 @@ var con = can.getContext("2d");
 can.width = can.height * (can.clientWidth / can.clientHeight);
 
 var ar = [];
-var va = 0;
-var vm = 0;
+var dt = 1;
 
-for (var i = 0; i < 50; i++) {
-  va = Math.random() * 2 * Math.PI;
-  vm = Math.random() * 0.1;
+for (var i = 0; i < 1000; i++) {
   ar.push({
     x_: Math.random() * can.width,
     y_: Math.random() * can.height,
-    vm: vm,
-    va: va,
+    vm: Math.random() * 0.1,
+    va: Math.random() * 2 * Math.PI,
     cl: "#" + Math.floor(Math.random() * 16777215).toString(16)
   });
 }
@@ -23,13 +20,11 @@ function draw() {
   con.clearRect(0, 0, can.width, can.height);
 
   for (var i = 0; i < ar.length; i++) {
-    ar[i].va = ar[i].va + (Math.random() - 0.5) * 0.1 * Math.PI;
-    //ar[i].vm = ar[i].vm * (1 + Math.random() - 0.5) * 0.1;
-    //ar[i].dx = ar[i].vm * Math.cos(ar[i].va);
-    //ar[i].dy = ar[i].vm * Math.sin(ar[i].va);
+    ar[i].va = ar[i].va + (Math.random() - 0.5) * Math.PI * 0.1;
+    ar[i].vm = ar[i].vm + (Math.random() - 0.5) * 0.01;
 
-    ar[i].x_ = (ar[i].x_ + ar[i].vm * Math.cos(ar[i].va)) % can.width;
-    ar[i].y_ = (ar[i].y_ + ar[i].vm * Math.sin(ar[i].va)) % can.height;
+    ar[i].x_ = (ar[i].x_ + ar[i].vm * Math.cos(ar[i].va) + can.width ) % can.width;
+    ar[i].y_ = (ar[i].y_ + ar[i].vm * Math.sin(ar[i].va) + can.height) % can.height;
 
     //calcola la forza di tutti su ciascuno
     //for(var i = 0; i < ar.length; i++)
